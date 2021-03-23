@@ -1,0 +1,67 @@
+<nav _ngcontent-syx-c106="" id="navbar-main" class="navbar navbar-top navbar-expand-md navbar-dark"><div _ngcontent-syx-c106="" class="container-fluid"><a _ngcontent-syx-c106="" routerlinkactive="active" class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" ng-reflect-router-link-active="active"></a><form _ngcontent-syx-c106="" class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto"><div _ngcontent-syx-c106="" class="form-group mb-0"><div _ngcontent-syx-c106="" class="input-group input-group-alternative"><div _ngcontent-syx-c106="" class="input-group-prepend"><span _ngcontent-syx-c106="" class="input-group-text"><i _ngcontent-syx-c106="" class="fas fa-search"></i></span></div><input _ngcontent-syx-c106="" placeholder="Search" type="text" class="form-control"></div></div></form><ul _ngcontent-syx-c106="" class="navbar-nav align-items-center d-none d-md-flex"><li _ngcontent-syx-c106="" ngbdropdown="" placement="bottom-right" class="nav-item" ng-reflect-placement="bottom-right"><a _ngcontent-syx-c106="" role="button" ngbdropdowntoggle="" class="dropdown-toggle nav-link pr-0"></a><div _ngcontent-syx-c106="" ngbdropdownmenu="" class="dropdown-menu-arrow dropdown-menu-right"></div></li></ul></div></nav>
+
+
+
+<div class="container-fluid mt-5">
+    <div class="row">
+      <div class="col-md-2" >
+        <button type="button" class="btn btn-outline-danger btn-block">Dasboard</button>
+
+        <button type="button" class="btn btn-outline-success btn-block">Table</button>
+      </div>
+      <div class="col-md-10" >
+        <div class="row">
+            <div class="col" >
+                <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Dasboard</h5>
+
+                      <div *ngIf="count!={}" class="d-flex" style="overflow-x: scroll;">
+                        <div class="ml-4 mr-4" style="width: fit-content;" *ngFor="let item of count | keyvalue ;let i = index ">
+                          <div class="circle" id="circle{{i}}">
+                            <strong>{{item.value}}</strong>
+                          </div>
+                          <div class="text-center">
+                            <span>{{item.key}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    
+                   
+                    </div>
+                  </div>
+            </div>
+            <div class="col" >
+                <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Special title treatment</h5>
+
+                      <div *ngIf="count!={}" class="d-flex" style="overflow-x: scroll;">
+                        <div class="ml-4 mr-4" style="width: fit-content;" *ngFor="let item of count1 | keyvalue ;let i = index ">
+                          <div class="circle1" id="circle1{{i}}">
+                            <strong>{{item.value}}</strong>
+                          </div>
+                          <div class="text-center">
+                            <span>{{item.key}}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+            </div>
+          </div>
+      </div>
+      <div class="col-md-12" >
+        <div class="card">
+          <div class="card-body">
+     
+
+    </div>            
+ </div>
+      </div>
+    </div>
+  </div>
+
+
+

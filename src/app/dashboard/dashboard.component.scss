@@ -1,0 +1,43 @@
+
+.circle {
+
+    width: fit-content;
+    position: relative;
+    text-align: left;
+    vertical-align: top;
+
+
+    strong{
+        position: absolute;
+        top: 48%;
+        transform: translateY(-50%);
+        left: 0;
+        text-align: center;
+        width: 100%;
+        font-size: 30px;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+}
+
+
+.circle1 {
+
+    width: fit-content;
+    position: relative;
+    text-align: left;
+    vertical-align: top;
+
+
+    strong{
+        position: absolute;
+        top: 48%;
+        transform: translateY(-50%);
+        left: 0;
+        text-align: center;
+        width: 100%;
+        font-size: 30px;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+}
