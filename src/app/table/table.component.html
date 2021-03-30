@@ -1,1 +1,48 @@
-<p>table works!</p>
+
+<div class="container-fluid mt-5">
+    <div class="row">
+      <div class="col-md-2" >
+        <button type="button" class="btn btn-outline-danger btn-block">Dasboard</button>
+
+        <button type="button" class="btn btn-outline-success btn-block">Table</button>
+      </div>
+    
+      <div class="col-md-10" >
+        <div class="card table-responsive" *ngIf="datases.length > 0">
+            <table  class="row-border hover" class="table">
+                <thead class="table-dark">
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Cronname</th>
+                      <th scope="col">subject</th>
+                      <th scope="col">Sever</th>
+                      <th scope="col">File Cronjob</th>
+                      <th scope="col">Crontime</th>
+                      <th scope="col">Runtime</th>
+                      <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                     
+          <tbody>          
+            <tr *ngFor =" let row1 of datases"> 
+              <td>{{row1.id}}</td>
+              <td>{{row1.cronname}}</td>
+              <td>{{row1.subject}}</td>
+              <td>{{row1.collect_ip}}</td>
+              <td>{{row1.filename}}</td>
+              <td>{{row1.cron_time}}</td>
+              <td>{{row1.runtime}}</td>
+              <td class="text-rigth">{{row1.statuscron}}</td>
+
+            <tr>
+            
+            </tbody>
+              </table>
+          </div>            
+        </div>
+      </div>
+    </div>
+
+
+
+
