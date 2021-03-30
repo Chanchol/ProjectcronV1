@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { DataTableDirective } from 'angular-datatables';
 declare var $ :any
+import * as d3 from "d3";
+import * as dc from "dc";
+import * as crossfilter from 'crossfilter'
+
 
 @Component({
   templateUrl: './table.component.html',
@@ -9,39 +16,35 @@ declare var $ :any
 })
 export class TableComponent implements OnInit {
 
-  title = 'Angular Router';
-  public datases:any = []
+  dtOptions: DataTables.Settings = {};
+  posts;
+  public datases = [];
 
-  constructor() {
-
-
+  constructor(private http: HttpClient) {
    }
 
 
-
-  ngOnInit(): void {
-
-    this.getdataa()
+    ngOnInit(): void {
+      this.dtOptions = {
+        pagingType: 'full_numbers',
+        pageLength: 5,
+        processing: true
+      };
     
+
+      setTimeout(() => {
+        this.getdataa()
+      }, 500);
+    }
+    
+
+async getdataa(){
+    const res = await fetch('http://projectcronapi-dot-kea-analytics.appspot.com/getcrondata',{method:'POST' ,redirect:'follow'})
+    var datareq = await res.json()
+    datareq['data'].sort(function(a, b){return a.id - b.id});
+    this.datases = datareq['data']
+
 }
-
-getdataa(){
-  fetch('http://projectcronapi-dot-kea-analytics.appspot.com/getcrondata',{method:'POST' ,redirect:'follow'}).then(datareq=>{
-  return   datareq.json()
-}).then(datareq => {console.log(datareq)
-  datareq['data'].sort(function(a, b){return a.id - b.id});
-  this.datases = datareq['data']
-  // $('#tablecron').DataTable();
-})
-}
-
-
-
-
-
-
-
-
 
 
 
