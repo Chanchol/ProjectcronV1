@@ -19,7 +19,7 @@ import * as crossfilter from 'crossfilter'
 })
 export class DashboardComponent implements OnInit {
 
-
+  dtOptions: DataTables.Settings = {};
   title = 'Angular Router';
 
 //----------------- variable Apis 8 -------------------------
@@ -33,14 +33,22 @@ export class DashboardComponent implements OnInit {
   public count:any={ }
   public count1:any={ }
   public colsum:any
+  public datatable:any[]
+  public datatablesever:any[]
   // public ctx:any;
   ngOnInit() {
 
- 
-  //  this.getfulldata()
+    // --- table  ----
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      processing: true
+    };
+    setTimeout(() => {
+      this.getdatable()
+    }, 500);
+  // --- Dashbooard ---
   this.getcronjobdata()
-  // this.getdescriptionfull()
-  // this.chartpie()
 
 }
 
@@ -49,9 +57,13 @@ export class DashboardComponent implements OnInit {
 private statusArray:any = []
 private collectArray:any = []
 
+
+
+
+// ------------------------------------------------ Dhasboard Status and Sever  ----------------------------------------------------------------------
+
 getcronjobdata(){
   var root = this   
-
 
   fetch('http://projectcronapi-dot-kea-analytics.appspot.com/getcrondata',{method:'POST' ,redirect:'follow'})
   .then(res=> res.json())
@@ -128,18 +140,17 @@ getcronjobdata(){
 
 this.chartpie(data['data'])
 })
+
 }
+
+
+// ------------------------------------------------ CHARTPIE ----------------------------------------------------------------------
+
+
 
 chartpie(data){
   var charts = new dc.BarChart('#barChart')
-  var experiments = [{'name' : 'A' , 'value' : 1},
-                     {'name' : 'B' , 'value' : 2},
-                     {'name' : 'C' , 'value' :3},
-                     {'name' : 'D', 'value' : 4},
-                     {'name' : 'E', 'value' : 5},
-                     {'name' : 'F', 'value' : 5}
   
-  ]
   
   var ndx            = crossfilter(data),
   fruitDimension = ndx.dimension(function(d) {return d.subject;}),
@@ -147,14 +158,13 @@ chartpie(data){
 
   console.log('group => ' , sumGroup.all());
 
-
   charts
-      .width(600)
-      .height(400)
+      .width(400)
+      .height(500)
       .x(d3.scaleBand())
       .xUnits(dc.units.ordinal)
       .brushOn(false)
-     
+      .colors("#0597ff")
       .yAxisLabel('Subject')
       .dimension(fruitDimension)
       .barPadding(0.1)
@@ -165,6 +175,27 @@ chartpie(data){
   
   }
 
+  // ------------------------------------------------ Summary Table ----------------------------------------------------------------------
+
+  async getdatable(){
+    const res = await fetch('http://projectcronapi-dot-kea-analytics.appspot.com/getcrondata',{method:'POST' ,redirect:'follow'})
+    var datatabledash = await res.json()
+    datatabledash['data'].sort(function(a, b){return a.id - b.id});
+    this.datatable = datatabledash['data']
+  }
+  
+// ------------------------------------------------ Button ----------------------------------------------------------------------
+public fillterdata:any = []
+getfillter(type,mode){
+  console.log(type,mode)
+  if(mode=="statuscron"){
+  this.fillterdata = []
+  this.fillterdata = this.datatable.filter(b=>b.statuscron==type)
+}
+  else if (mode=="collect_ip"){
+  this.fillterdata = this.datatable.filter(b=>b.collect_ip==type)
+  }
+}
 
 public updateOptions() {
     this.salesChart.data.datasets[0].data = this.data;

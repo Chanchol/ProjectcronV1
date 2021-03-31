@@ -10,7 +10,7 @@ import * as crossfilter from 'crossfilter'
 
 @Component({
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.css'],
+  styleUrls: ['./table.component.scss'],
   selector: 'app-zero-config',
   // templateUrl: 'zero-config.component.html'
 })

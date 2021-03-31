@@ -1,28 +1,34 @@
 
 <div class="container-fluid mt-5">
-    <div class="row">
-      <div class="col-md-2" >
-        <button  type="button"  routerLink="/dashboard" class="btn btn-outline-danger btn-block" >Dasboard</button>
+    
+<div class="sidenav pt-5">
+  <a class="active" href="dashboard">Dashboard</a>
+  <a  href="table">Table</a>
 
-        <button type="button"  routerLink="/table" class="btn btn-outline-success btn-block">Table</button>
-      </div>
-      <div class="col-md-10" >
+</div>
+      <div class="main" >
         <div class="row">
             <div class="col" >
                 <div class="card">
                     <div class="card-body">
-                      <h5 class="card-title">Dasboard</h5>
+                      <h5 class="card-title text-center">Dasboard</h5>
 
-                      <div *ngIf="count!={}" class="d-flex" style="overflow-x: scroll;">
+                      <div *ngIf="count!={}" class="d-flex" >
                         <div class="ml-4 mr-4" style="width: fit-content;" *ngFor="let item of count | keyvalue ;let i = index ">
-                          
+
+                        <button class="btnn" (click)="getfillter(item.key,'statuscron')"> 
+                           
                           <div class="circle" id="circle{{i}}">
                             <strong>{{item.value}}</strong>
                           </div>
                           <div class="text-center">
                             <span>{{item.key}}</span>
                           </div>
+                        </button>
                         </div>
+
+                        <button class="btnn" (click)="getfillter(colsum,'statuscron')"> 
+
                         <div class="ml-4 mr-4" style="width: fit-content;">
                        <div class="circle" id="circlesum">
                           <strong>  {{colsum}} </strong>
@@ -31,47 +37,102 @@
                       <span>All crojob</span>
                   </div>
                       </div>
+                      </button>
                 </div>
               </div>
            </div>
         </div>
-        
-            <div class="col" >
+            <div class="col mb-3" >
                 <div class="card">
                     <div class="card-body">
-                      <h5 class="card-title">Special title treatment</h5>
-
-                      <div *ngIf="count!={}" class="d-flex" style="overflow-x: scroll;">
+                      <h5 class="card-title text-center">Special title treatment</h5>
+                      <div *ngIf="count!={}" class="d-flex">
                         <div class="ml-4 mr-4" style="width: fit-content;" *ngFor="let item of count1 | keyvalue ;let i = index ">
+                      
+                          <button class="btnn" (click)="getfillter(item.key,'collect_ip')"> 
+                         
                           <div class="circle1" id="circle1{{i}}">
                             <strong>{{item.value}}</strong>
                           </div>
                           <div class="text-center">
                             <span>{{item.key}}</span>
                           </div>
+                    </button>
+
                         </div>
                       </div>
-
                     </div>
                   </div>
             </div>
             
+            <div class="col-md-8 " >
+              <div class="card table-responsive" *ngIf="datatable">
+              <table  *ngIf='fillterdata.length == 0' datatable class="row-border hover ">
+                <thead class = "dashborads">
+                  <tr >
+                    <th scope="col">ID</th>
+                    <th scope="col">Cronname</th>
+                    <th scope="col">Sever</th>
+                    <th scope="col">Subject</th>
+                    <th scope="col">Crontime</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row1 of datatable">
+                    <td>{{row1.id}}</td>
+                    <td>{{row1.cronname}}</td>
+                    <td>{{row1.collect_ip}}</td>
+                    <td>{{row1.subject}}</td>
+                    <td>{{row1.cron_time}}</td>
+                    <td>{{row1.statuscron}}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <table *ngIf='fillterdata.length > 0' datatable class="row-border hover ">
+                <thead class = "table-dark">
+                  <tr >
+                    <th scope="col">ID</th>
+                    <th scope="col">Cronname</th>
+                    <th scope="col">Sever</th>
+                    <th scope="col">Subject</th>
+                    <th scope="col">Crontime</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row1 of fillterdata">
+                    <td>{{row1.id}}</td>
+                    <td>{{row1.cronname}}</td>
+                    <td>{{row1.collect_ip}}</td>
+                    <td>{{row1.subject}}</td>
+                    <td>{{row1.cron_time}}</td>
+                    <td>{{row1.statuscron}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              </div>
+            </div>
+            
+            <div class="col-md-4 " >
+              <div class="card">
+                <div class= "card-body text-center">
+      
+                 <div id="barChart"></div>
+                </div>            
+              </div>
+            </div>  
+
+
+
+
+
           </div>
       </div>
 
-      <div class="col-md-2 " >
-      </div>
-      
-      <div class="col-md-10 " >
-        <div class="card">
-          <div class= "card-body text-center">
 
-           <div id="barChart"></div>
-          </div>            
-        </div>
-      </div>
-    </div>
-  </div>
+</div>
 
 
 
