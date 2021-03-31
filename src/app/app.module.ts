@@ -5,14 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TableComponent } from './table/table.component';
-import { HomeComponent } from './home/home.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DataTablesModule } from 'angular-datatables';
 import { HttpClientModule } from '@angular/common/http';
 const appRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'table', component: TableComponent },
-  { path: 'home', component: HomeComponent },
   { path: '',
     redirectTo: '/home',
     pathMatch: 'full'
@@ -24,8 +22,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     DashboardComponent,
-    TableComponent,
-    HomeComponent
+    TableComponent
+ 
   ],
   imports: [
     BrowserModule,
