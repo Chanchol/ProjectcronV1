@@ -8,7 +8,7 @@
 </div>
       <div class="main" >
         <div class="row">
-            <div class="col" >
+            <div class="col box colorbox" >
                 <div class="card">
                     <div class="card-body">
                       <h5 class="card-title text-center">Dasboard</h5>
@@ -42,10 +42,10 @@
               </div>
            </div>
         </div>
-            <div class="col mb-3" >
+            <div class="col  box colorbox" >
                 <div class="card">
                     <div class="card-body">
-                      <h5 class="card-title text-center">Special title treatment</h5>
+                      <h5 class="card-title text-center">Address Cronjob</h5>
                       <div *ngIf="count!={}" class="d-flex">
                         <div class="ml-4 mr-4" style="width: fit-content;" *ngFor="let item of count1 | keyvalue ;let i = index ">
                       
@@ -65,7 +65,7 @@
                   </div>
             </div>
             
-            <div class="col-md-8 " >
+            <div class="col-md-8 box colorbox" >
               <div class="card table-responsive" *ngIf="datatable">
               <table  *ngIf='fillterdata.length == 0' datatable class="row-border hover ">
                 <thead class = "dashborads">
@@ -76,6 +76,7 @@
                     <th scope="col">Subject</th>
                     <th scope="col">Crontime</th>
                     <th scope="col">Status</th>
+                    <th scope="col">control</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -85,7 +86,12 @@
                     <td>{{row1.collect_ip}}</td>
                     <td>{{row1.subject}}</td>
                     <td>{{row1.cron_time}}</td>
-                    <td>{{row1.statuscron}}</td>
+                    <td class="text-rigth"><span>{{row1.statuscron}}</span><br><small>({{row1.status_description}})</small></td>
+
+                    <td>
+                      <button *ngIf="row1.enable == 'True'" (click)="openpopup(row1,false)" class="btn btn-danger">Stop</button>
+                      <button *ngIf="row1.enable == 'False'" (click)="openpopup(row1,true)" class="btn btn-success">Start</button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -99,6 +105,7 @@
                     <th scope="col">Subject</th>
                     <th scope="col">Crontime</th>
                     <th scope="col">Status</th>
+                    <th scope="col">control</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -108,16 +115,23 @@
                     <td>{{row1.collect_ip}}</td>
                     <td>{{row1.subject}}</td>
                     <td>{{row1.cron_time}}</td>
-                    <td>{{row1.statuscron}}</td>
+                    <td class="text-rigth"><span>{{row1.statuscron}}</span><br><small>({{row1.status_description}})</small></td>
+                    <td>
+                      <button *ngIf="row1.enable == 'True'" (click)="openpopup(row1,false)" class="btn btn-danger">Stop</button>
+                      <button *ngIf="row1.enable == 'False'" (click)="openpopup(row1,true)" class="btn btn-success">Start</button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
               </div>
             </div>
             
-            <div class="col-md-4 " >
+
+
+
+            <div class="col-md-4 box colorbox" >
               <div class="card">
-                <div class= "card-body text-center">
+                <div class= "card-body w-100 ">
       
                  <div id="barChart"></div>
                 </div>            
@@ -135,4 +149,25 @@
 </div>
 
 
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Stop and Start</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="textCron">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button"id ="openpopup" (click)="comfirmstop()" class="btn btn-primary">ยืนยัน</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">ออก</button>
+      </div>
+    </div>
+  </div>
+</div>
 

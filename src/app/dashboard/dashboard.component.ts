@@ -57,6 +57,8 @@ export class DashboardComponent implements OnInit {
 private statusArray:any = []
 private collectArray:any = []
 
+private collectlinkapi:any = "http://projectcronapi-dot-kea-analytics.appspot.com/"
+
 
 
 
@@ -65,7 +67,7 @@ private collectArray:any = []
 getcronjobdata(){
   var root = this   
 
-  fetch('http://projectcronapi-dot-kea-analytics.appspot.com/getcrondata',{method:'POST' ,redirect:'follow'})
+  fetch(this.collectlinkapi+'getcrondata',{method:'POST' ,redirect:'follow'})
   .then(res=> res.json())
   .then(data => {
 
@@ -159,7 +161,6 @@ chartpie(data){
   console.log('group => ' , sumGroup.all());
 
   charts
-      .width(400)
       .height(500)
       .x(d3.scaleBand())
       .xUnits(dc.units.ordinal)
@@ -169,8 +170,10 @@ chartpie(data){
       .dimension(fruitDimension)
       .barPadding(0.1)
       .outerPadding(0.05)
-      .group(sumGroup);
-
+      .group(sumGroup)
+      .clipPadding(10)
+      .margins({left: 40, top: 10, right: 50, bottom: 90})
+      // charts.margins.bottom = 50
       charts.render();
   
   }
@@ -178,7 +181,7 @@ chartpie(data){
   // ------------------------------------------------ Summary Table ----------------------------------------------------------------------
 
   async getdatable(){
-    const res = await fetch('http://projectcronapi-dot-kea-analytics.appspot.com/getcrondata',{method:'POST' ,redirect:'follow'})
+    const res = await fetch(this.collectlinkapi+'getcrondata',{method:'POST' ,redirect:'follow'})
     var datatabledash = await res.json()
     datatabledash['data'].sort(function(a, b){return a.id - b.id});
     this.datatable = datatabledash['data']
@@ -196,6 +199,30 @@ getfillter(type,mode){
   this.fillterdata = this.datatable.filter(b=>b.collect_ip==type)
   }
 }
+
+
+private listitem = {'item':null,'type':null}
+comfirmstop(){
+  var param = {'id':this.listitem.item.id,'enable':this.listitem.type}
+  fetch(this.collectlinkapi+'updatestenable',
+  {method:'POST',
+  headers: {"Content-Type": "application/json"},
+  body: JSON.stringify(param),
+  redirect:'follow'}
+  ).then(res => res.json()).then(data =>{
+    location.reload()
+  }
+  )
+  
+}
+
+openpopup(item,type){  
+  this.listitem.item = item
+  this.listitem.type = type
+ $('#textCron').html(`<span>ยืนยันการหยุดคอน ${item.cronname}</span>`)
+ $('#exampleModalCenter').modal('toggle')
+}
+
 
 public updateOptions() {
     this.salesChart.data.datasets[0].data = this.data;

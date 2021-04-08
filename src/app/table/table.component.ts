@@ -19,7 +19,7 @@ export class TableComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   posts;
   public datases = [];
-
+  private collectlinkapi:any = "http://projectcronapi-dot-kea-analytics.appspot.com/"
   constructor(private http: HttpClient) {
    }
 
@@ -38,6 +38,8 @@ export class TableComponent implements OnInit {
     }
     
 
+
+
 async getdataa(){
     const res = await fetch('http://projectcronapi-dot-kea-analytics.appspot.com/getcrondata',{method:'POST' ,redirect:'follow'})
     var datareq = await res.json()
@@ -46,7 +48,27 @@ async getdataa(){
 
 }
 
-
+private listitem = {'item':null,'type':null}
+    
+comfirmstop(){
+  var param = {'id':this.listitem.item.id,'enable':this.listitem.type}
+  fetch(this.collectlinkapi+'updatestenable',
+  {method:'POST',
+  headers: {"Content-Type": "application/json"},
+  body: JSON.stringify(param),
+  redirect:'follow'}
+  ).then(res => res.json()).then(data =>{
+    location.reload()
+  }
+  )
+  
+}
+openpopup(item,type){  
+  this.listitem.item = item
+  this.listitem.type = type
+ $('#textCron').html(`<span>ยืนยันการหยุดคอน ${item.cronname}</span>`)
+ $('#exampleModalCenter').modal('toggle')
+}
 
 
 }
