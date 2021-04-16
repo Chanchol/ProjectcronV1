@@ -1,6 +1,18 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
+
+
+// npm install jquery --save
+// npm install datatables.net --save
+// npm install datatables.net-dt --save
+// npm install angular-datatables@6.0.0 --save
+// npm install @types/jquery --save-dev
+// npm install @types/datatables.net --save-dev
+
+
+
+
 module.exports = function (config) {
   config.set({
     basePath: '',
