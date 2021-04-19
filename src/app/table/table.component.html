@@ -36,7 +36,7 @@
                 <td class="text-rigth"><span>{{row1.statuscron}}</span><br><small>({{row1.status_description}})</small></td>
                 <td>
                   <button *ngIf="row1.enable == 'True'" (click)="openpopup(row1,false)" class="btn btn-danger">Stop</button>
-                  <button *ngIf="row1.enable == 'False'" (click)="openpopup(row1,true)" class="btn btn-success">Start</button>
+                  <button *ngIf="row1.enable == 'False'" (click)="openpopup1(row1,true)" class="btn btn-success">Start</button>
                 </td>
               </tr>
             </tbody>

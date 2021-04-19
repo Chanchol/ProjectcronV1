@@ -219,10 +219,15 @@ comfirmstop(){
 openpopup(item,type){  
   this.listitem.item = item
   this.listitem.type = type
- $('#textCron').html(`<span>ยืนยันการหยุดคอน ${item.cronname}</span>`)
+ $('#textCron').html(`<span>ยืนยันการหยุดครอน ${item.cronname}</span>`)
  $('#exampleModalCenter').modal('toggle')
 }
-
+openpopup1(item,type){  
+  this.listitem.item = item
+  this.listitem.type = type
+ $('#textCron').html(`<span>ยืนยันการทำงานครอน ${item.cronname}</span>`)
+ $('#exampleModalCenter').modal('toggle')
+}
 
 public updateOptions() {
     this.salesChart.data.datasets[0].data = this.data;
